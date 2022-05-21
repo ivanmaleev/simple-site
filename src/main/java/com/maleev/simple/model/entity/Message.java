@@ -1,4 +1,4 @@
-package com.maleev.simple.entity;
+package com.maleev.simple.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

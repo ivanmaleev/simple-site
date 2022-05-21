@@ -1,6 +1,6 @@
 package com.maleev.simple.repository;
 
-import com.maleev.simple.entity.Message;
+import com.maleev.simple.model.entity.Message;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
