@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -33,7 +34,7 @@ public class User implements UserDetails {
     private boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -63,5 +64,12 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return username;
+    }
+
+    public void addRole(Role role) {
+        if (this.roles == null) {
+            this.roles = new HashSet<>();
+        }
+        this.roles.add(role);
     }
 }
