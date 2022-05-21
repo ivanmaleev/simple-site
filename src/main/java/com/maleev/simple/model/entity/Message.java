@@ -25,10 +25,10 @@ public class Message {
     private Long id;
     private String text;
     private String tag;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
+    private String filename;
 
     public Message(User user, String text, String tag) {
         this.user = user;
