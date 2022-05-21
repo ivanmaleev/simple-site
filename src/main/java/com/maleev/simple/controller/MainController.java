@@ -1,9 +1,11 @@
 package com.maleev.simple.controller;
 
 import com.maleev.simple.model.entity.Message;
+import com.maleev.simple.model.entity.User;
 import com.maleev.simple.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,10 +33,11 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String save(@RequestParam(name = "text", required = true, defaultValue = "") String text,
+    public String save(@AuthenticationPrincipal User user,
+                       @RequestParam(name = "text", required = true, defaultValue = "") String text,
                        @RequestParam(name = "tag", required = true, defaultValue = "") String tag,
                        Map<String, Object> model) {
-        Message message = new Message(text, tag);
+        Message message = new Message(user, text, tag);
         messageRepository.save(message);
         model.put("messages", messageRepository.findAll());
         return "main";
