@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,32 +28,26 @@ public class MainController {
     }
 
     @GetMapping("/main")
-    public String main(Map<String, Object> model) {
-        model.put("messages", messageRepository.findAll());
+    public String main(@RequestParam(required = false, defaultValue = "") String tagFilter, Model model) {
+        List<Message> messages;
+        if ("".equals(tagFilter)) {
+            messages = messageRepository.findAll();
+        } else {
+            messages = messageRepository.findAllByTag(tagFilter);
+        }
+        model.addAttribute("messages", messages);
+        model.addAttribute("tagFilter", tagFilter);
         return "main";
     }
 
     @PostMapping("/main")
     public String save(@AuthenticationPrincipal User user,
-                       @RequestParam(name = "text", required = true, defaultValue = "") String text,
-                       @RequestParam(name = "tag", required = true, defaultValue = "") String tag,
-                       Map<String, Object> model) {
+                       @RequestParam String text,
+                       @RequestParam String tag, Model model) {
         Message message = new Message(user, text, tag);
         messageRepository.save(message);
-        model.put("messages", messageRepository.findAll());
-        return "main";
-    }
-
-    @PostMapping("/filter")
-    public String filter(@RequestParam(name = "tag", required = true, defaultValue = "") String tag,
-                         Map<String, Object> model) {
-        List<Message> messages;
-        if ("".equals(tag)) {
-            messages = messageRepository.findAll();
-        } else {
-            messages = messageRepository.findAllByTag(tag);
-        }
-        model.put("messages", messages);
+        model.addAttribute("messages", messageRepository.findAll());
+        model.addAttribute("tagFilter", "");
         return "main";
     }
 }
