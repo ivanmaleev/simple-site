@@ -72,4 +72,8 @@ public class User implements UserDetails {
         }
         this.roles.add(role);
     }
+
+    public boolean isAdmin() {
+        return this.roles.contains(Role.ADMIN);
+    }
 }
