@@ -1,6 +1,6 @@
 package com.maleev.simple.config;
 
-import com.maleev.simple.service.UserService;
+import com.maleev.simple.service.impl.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/registration", "/img/**", "/static/**")
+                    .antMatchers("/", "/registration", "/img/**", "/static/**", "/activate/*")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
