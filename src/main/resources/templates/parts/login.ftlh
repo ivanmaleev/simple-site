@@ -30,8 +30,8 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Password:</label>
                 <div class="col-sm-6">
-                    <input type="password" name="password2"
-                           class="form-control ${(password2Error??)?string('is-invalid', '')}"
+                    <input type="password" name="passwordConf"
+                           class="form-control ${(passwordConfError??)?string('is-invalid', '')}"
                            placeholder="Retype password"/>
                     <#if password2Error??>
                         <div class="invalid-feedback">
@@ -52,6 +52,14 @@
                         </div>
                     </#if>
                 </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="g-recaptcha" data-sitekey="6LfZ_iUgAAAAAFbtj5fm1RLER9V7cLZ4ZUK6dTtn"></div>
+                <#if captchaError??>
+                    <div class="alert alert-danger" role="alert">
+                        ${captchaError}
+                    </div>
+                </#if>
             </div>
         </#if>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>

@@ -38,9 +38,6 @@ public class User implements UserDetails {
     private String username;
     @NotBlank(message = "Password is empty")
     private String password;
-    @Transient
-    @NotBlank(message = "Password confirmation cannot be empty")
-    private String passwordConf;
     private boolean active;
     @Email(message = "Email isn't correct")
     @NotBlank(message = "Email is empty")
