@@ -8,19 +8,24 @@ import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "simple")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,13 +34,21 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Username is empty")
     private String username;
+    @NotBlank(message = "Password is empty")
     private String password;
+    @Transient
+    @NotBlank(message = "Password confirmation cannot be empty")
+    private String passwordConf;
     private boolean active;
+    @Email(message = "Email isn't correct")
+    @NotBlank(message = "Email is empty")
     private String email;
     private String activationCode;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", schema = "simple", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles = new HashSet<>();
 
     @Override

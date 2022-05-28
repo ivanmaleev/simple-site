@@ -10,6 +10,7 @@ import org.springframework.mail.MailException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -32,9 +33,16 @@ public class UserService implements UserDetailsService {
     @Autowired
     private final MailSender mailSender;
 
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username).get();
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return user.get();
     }
 
     public boolean addUser(User user) {
@@ -45,6 +53,7 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (sendMessage(user)) {
             userRepository.save(user);
             return true;

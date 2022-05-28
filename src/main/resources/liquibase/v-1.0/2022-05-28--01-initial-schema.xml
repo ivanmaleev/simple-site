@@ -12,7 +12,7 @@
             Создание таблицы users
         </comment>
         <sql>
-            create table users (
+            create table simple.users (
             id bigserial NOT NULL PRIMARY KEY,
             activation_code varchar(255),
             active boolean NOT NULL,
@@ -26,27 +26,27 @@
             Создание таблицы message
         </comment>
         <sql>
-            create table message (
+            create table simple.message (
             id bigserial NOT NULL PRIMARY KEY,
             filename varchar(255),
             tag varchar(255),
             text varchar(2048) NOT NULL,
-            user_id bigint NOT NULL REFERENCES users(id) ON DELETE RESTRICT
+            user_id bigint NOT NULL REFERENCES simple.users(id) ON DELETE RESTRICT
             );
         </sql>
 
         <comment>
-            Создание таблицы user_roles
+            Создание таблицы simple.user_roles
         </comment>
         <sql>
-            create table user_roles (
-            user_id bigint NOT NULL REFERENCES users(id) ON DELETE RESTRICT,
+            create table simple.user_roles (
+            user_id bigint NOT NULL REFERENCES simple.users(id) ON DELETE RESTRICT,
             roles int4
             );
         </sql>
 
         <sqlFile encoding="utf8"
-                 dbms = "postgresql"
+                 dbms="postgresql"
                  path="sql/init.sql"
                  relativeToChangelogFile="true"
                  splitStatements="false"
