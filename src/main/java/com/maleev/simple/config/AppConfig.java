@@ -36,10 +36,6 @@ public class AppConfig {
         return new RestTemplate();
     }
 
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
-    }
-
     @Bean
     public JavaMailSender getMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

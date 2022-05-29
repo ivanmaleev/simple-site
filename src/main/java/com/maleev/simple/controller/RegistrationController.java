@@ -48,8 +48,7 @@ public class RegistrationController {
             @RequestParam("g-recaptcha-response") String captchaResponce,
             @Valid User user,
             BindingResult bindingResult,
-            Model model
-    ) {
+            Model model) {
         String url = String.format(CAPTCHA_URL, secret, captchaResponce);
         CaptchaResponseDto response = restTemplate.postForObject(url, Collections.emptyList(), CaptchaResponseDto.class);
         if (!response.isSuccess()) {

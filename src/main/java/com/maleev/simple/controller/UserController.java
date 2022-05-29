@@ -23,7 +23,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    private final UserService userService;
+    private UserService userService;
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
@@ -34,10 +34,10 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
-    public String editUser(@PathVariable User user, Model model) {
+    public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
-        return "editUser";
+        return "userEdit";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -45,8 +45,7 @@ public class UserController {
     public String userSave(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user
-    ) {
+            @RequestParam("userId") User user) {
         userService.save(user, username, form);
         return "redirect:/user";
     }
@@ -62,8 +61,7 @@ public class UserController {
     public String updateProfile(
             @AuthenticationPrincipal User user,
             @RequestParam String password,
-            @RequestParam String email
-    ) {
+            @RequestParam String email) {
         userService.updateProfile(user, password, email);
         return "redirect:/user/profile";
     }
