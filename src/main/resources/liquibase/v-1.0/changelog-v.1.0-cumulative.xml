@@ -6,4 +6,5 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <include file="2022-05-28--01-initial-schema.xml" relativeToChangelogFile="true"/>
+    <include file="2022-06-04--01-add_user_subscriptions.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
