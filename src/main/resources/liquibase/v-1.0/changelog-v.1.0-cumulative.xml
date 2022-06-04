@@ -7,4 +7,5 @@
 
     <include file="2022-05-28--01-initial-schema.xml" relativeToChangelogFile="true"/>
     <include file="2022-06-04--01-add_user_subscriptions.xml" relativeToChangelogFile="true"/>
+    <include file="2022-06-04--02-add_message_likes.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

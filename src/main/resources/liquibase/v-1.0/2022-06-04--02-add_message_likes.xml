@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1" author="Ivan">
+
+        <comment>
+            Создание таблицы message_likes
+        </comment>
+        <sql>
+            CREATE TABLE simple.message_likes (
+            user_id bigint NOT NULL REFERENCES simple.users(id) ON DELETE RESTRICT,
+            message_id bigint NOT NULL REFERENCES simple.message(id) ON DELETE RESTRICT,
+            PRIMARY KEY (user_id, message_id)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
+
+
+
