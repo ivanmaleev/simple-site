@@ -74,8 +74,7 @@ public class MessageController {
             @Valid Message message,
             BindingResult bindingResult,
             Model model,
-            @RequestParam("file") MultipartFile file
-    ) throws IOException {
+            @RequestParam("file") MultipartFile file) throws IOException {
         message.setAuthor(user);
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
@@ -97,8 +96,7 @@ public class MessageController {
             @PathVariable User author,
             Model model,
             @RequestParam(required = false) Message message,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
-    ) {
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
         Page<MessageDto> page = messageService.messageListForUser(pageable, currentUser, author);
         model.addAttribute("userChannel", author);
         model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
