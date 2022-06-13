@@ -2,12 +2,11 @@ package com.maleev.simple.controller;
 
 import com.maleev.simple.model.dto.CaptchaResponseDto;
 import com.maleev.simple.model.entity.User;
-import com.maleev.simple.service.impl.UserService;
+import com.maleev.simple.service.UserService;
 import com.maleev.simple.utils.ControllerUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;

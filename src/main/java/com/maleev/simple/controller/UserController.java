@@ -2,7 +2,7 @@ package com.maleev.simple.controller;
 
 import com.maleev.simple.model.entity.User;
 import com.maleev.simple.model.enums.Role;
-import com.maleev.simple.service.impl.UserService;
+import com.maleev.simple.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
