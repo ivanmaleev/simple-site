@@ -1,5 +1,9 @@
 package com.maleev.simple.config;
 
+import com.maleev.simple.service.MailSender;
+import com.maleev.simple.service.MessageService;
+import com.maleev.simple.service.impl.MailSenderImpl;
+import com.maleev.simple.service.impl.MessageServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +38,16 @@ public class AppConfig {
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public MailSender mailSender() {
+        return new MailSenderImpl();
+    }
+
+    @Bean
+    public MessageService messageService(){
+        return new MessageServiceImpl();
     }
 
     @Bean

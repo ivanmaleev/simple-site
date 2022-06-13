@@ -26,6 +26,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Имплементация сервиса работы с пользователями
+ */
 @Service
 @NoArgsConstructor
 @AllArgsConstructor

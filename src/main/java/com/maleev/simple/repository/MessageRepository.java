@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
+/**
+ * репозиторий по работе с сущностью {@link Message}
+ */
 public interface MessageRepository extends CrudRepository<Message, Long> {
 
     @Query("SELECT new com.maleev.simple.model.dto.MessageDto(m, count(ml), sum(case when ml = :user then 1 else 0 end) > 0) \n" +

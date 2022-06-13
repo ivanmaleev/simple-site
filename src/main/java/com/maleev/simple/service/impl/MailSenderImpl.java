@@ -9,7 +9,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Service
+/**
+ * Имплементация Сервиса работы с почтой
+ */
 public class MailSenderImpl implements MailSender {
 
     @Qualifier("getMailSender")
